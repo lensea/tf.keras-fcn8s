@@ -25,8 +25,8 @@ _WEIGHT_DECAY = 0.0005
 NUM_OF_CLASSESS = 2
 IMAGE_SIZE = 256
 _NUM_IMAGES = {
-    'training': 2250,
-    'validation': 1542,
+    'training': 1464,
+    'validation': 1449,
 }
 
 
