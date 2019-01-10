@@ -22,7 +22,7 @@ batch_size=2
 learning_rate = 1e-6 
 _MOMENTUM = 0.9
 _WEIGHT_DECAY = 0.0005
-NUM_OF_CLASSESS = 2
+NUM_OF_CLASSESS = 21
 IMAGE_SIZE = 256
 _NUM_IMAGES = {
     'training': 1464,
