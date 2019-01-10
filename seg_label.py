@@ -1,14 +1,20 @@
-import os
+
 import numpy as np
 from PIL import Image
 from keras.preprocessing.image import load_img, img_to_array
-import ready_data
- 
+import os
 
-data_dir = "/home/ispr/data/solder_seg/"
-classes = ['background', 'solder']
+
+classes = ['background', 'aeroplane', 'bicycle', 'bird', 'boat',
+           'bottle', 'bus', 'car', 'cat', 'chair', 'cow', 'dining table',
+           'dog', 'horse', 'motorbike', 'person', 'potted plant',
+           'sheep', 'sofa', 'train', 'tv/monitor']
  
-colormap = [[192, 192, 192], [128, 128, 64]]
+colormap = [[0, 0, 0], [128, 0, 0], [0, 128, 0], [128, 128, 0], [0, 0, 128],
+            [128, 0, 128], [0, 128, 128], [128, 128, 128], [64, 0, 0], [192, 0, 0],
+            [64, 128, 0], [192, 128, 0], [64, 0, 128], [192, 0, 128],
+            [64, 128, 128], [192, 128, 128], [0, 64, 0], [128, 64, 0],
+            [0, 192, 0], [128, 192, 0], [0, 64, 128]]
  
 # 利用下面的代码，将标注的图片转换为单通道的label图像
 cm2lbl = np.zeros(256**3)
@@ -33,26 +39,25 @@ def change_label(label_url, label_name):
     label_single = Image.fromarray(label_img)
     label_single = label_single.convert('L')
  
-    #save_path = '/home/ispr/data/VOCdevkit/VOC2012/Label'
-    #ave_path = os.path.join(save_path, label_name)  # 确定保存路径及名称
-    save_path = label_name
+    save_path = '/home/ispr/data/VOCdevkit/VOC2012/Label'
+    save_path = os.path.join(save_path, label_name)  # 确定保存路径及名称
     label_single.save(save_path)
  
  
 val_file_path = '/home/ispr/data/VOCdevkit/VOC2012/ImageSets/Segmentation/trainval.txt'  # 文件名存放路径
 label_file_path = '/home/ispr/data/VOCdevkit/VOC2012/SegmentationClass'  # 原label存放路径
+ 
+with open(val_file_path, 'r') as f:
+    file_names = f.readlines()
+    count = 0
+    for name in file_names:
+        count += 1
+        name = name.strip('\n')  # 去掉换行符
+        label_name = name + '.png'  # label文件名
+        label_url = os.path.join(label_file_path, label_name)
+        print('这是第 %s 张' % count)
+        print(label_url)
+        change_label(label_url, label_name)
 
-
-
-train_records,val_records = ready_data.get_imgs_path(data_dir)
-
-for train_data in train_records:
-    anno_path = train_data["annotation"]
-    print(anno_path)
-    change_label(anno_path,anno_path)
-    
-
-for val_data in val_records:
-    anno_path = val_data["annotation"]
-    print(anno_path)
-    change_label(anno_path,anno_path)
+image_test = Image.open("/home/ispr/data/VOCdevkit/VOC2012/Label/2007_000123.png")
+print(np.unique(image_test))
