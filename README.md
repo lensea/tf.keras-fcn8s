@@ -6,7 +6,8 @@ The implementation is largely based on the reference code provided by the author
 
 1、tf.keras.layers build model
 
-2、reference: Thanks to shekkizh's and 4 wucng's open source code
+2、reference: 
+Thanks to shekkizh's and  wucng's open source code
 
 1)shekkizh: git clone https://github.com/shekkizh/FCN.tensorflow.git
 
