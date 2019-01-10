@@ -15,7 +15,7 @@ import BatchDatsetReader as dataset
 os.environ['TF_ENABLE_WINOGRAD_NONFUSED'] = '0'
 #tf.enable_eager_execution()
 
-data_dir='/home/ispr/data/solder_seg/'
+data_dir='/home/ispr/data/MIT_SceneParsing/ADEChallengeData2016/'
 log_dir='./log/'
 train_epochs=100
 batch_size=2
